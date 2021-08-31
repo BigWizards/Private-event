@@ -10,20 +10,56 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <% if flash[:notice]%>
-    <div class="notification is-primary global-notification">
-      <p class="notice"><%= notice %></p>
-    </div>
-  <% end %>
-
-  <% if flash[:alert]%>
-    <div class="notification is-danger global-notification">
-      <p class="alert"><%= alert %></p>
-    </div>
-  <% end %>
-
-
   <body>
+    <% if flash[:notice]%>
+      <div class="notification is-primary global-notification">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+    <% if flash[:alert]%>
+      <div class="notification is-danger global-notification">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    <nav class="navbar is-primary">
+      <div class="navbar-brand">
+        <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title has-text-white">EventBright</h1>
+        <% end %>
+        <a role="button" class="navbar-burger has-dropdown is-hoverable" data-target="navMenu" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-start">
+          <a>
+            <%= link_to "Home", root_path, class: "navbar-item" %>
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <% if user_signed_in? %>
+            <a class= "control">
+              <%= link_to current_user.name, edit_user_registration_path, class: "navbar-item"%>
+            </a>
+            <a class=control>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "navbar-item" %>
+            </a>
+            <% else %>
+            <a class= "control">
+              <%= link_to "Sign In", new_user_session_path, class: "navbar-item" %>
+            </a>
+            <a class= "control">
+              <%= link_to "Sign Up", new_user_registration_path, class: "navbar-item" %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
