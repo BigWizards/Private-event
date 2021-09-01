@@ -1,0 +1,20 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">
+      Created events
+    </h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <% if current_user.created_events.any? %>
+      <div class = "block">
+        You have created events.
+      </div>
+      <% else %>
+      <div class = "block">
+        You have no created events.
+      </div>
+    <% end %>
+  </div>
+</section>
