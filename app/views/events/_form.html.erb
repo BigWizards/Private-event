@@ -1,37 +1,24 @@
-<%= form_with(model: event) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+<%= simple_form_for(@event) do |f| %>
+<%= f.error_notification %>
+<div class="field">
+  <div class="control">
+    <%= f.input :name, label: "Event name", input_html: { class: "input"}, wrapper: false, label_html: {class: "label"}, autofocus: true %>
   </div>
-
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location %>
+</div>
+<div class="field">
+  <div class="control">
+    <%= f.input :location, label: "The event's location", input_html: { class: "input"}, wrapper: false, label_html: {class: "label"} %>
   </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.text_field :date %>
+</div>
+<div class="field">
+  <div class="control">
+    <%= f.input :date, as: :date, label: "When is the event being held?", input_html: { class: "input"}, wrapper: false, label_html: {class: "label"} %>
   </div>
-
-  <div class="field">
-    <%= form.label :host %>
-    <%= form.text_field :host %>
+</div>
+<div class="field">
+  <div class="control">
+    <%= f.input :creator, label: "Creator display name", input_html: { class: "input"}, wrapper: false, label_html: {class: "label"} %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
+<%= f.button :submit, class: "button is-primary" %>
 <% end %>
