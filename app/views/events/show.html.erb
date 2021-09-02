@@ -1,24 +1,37 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
-
-<p>
-  <strong>Host:</strong>
-  <%= @event.host %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<section class = "section">
+  <div class = "container">
+    <h1 class = "title">
+      Your new event!
+    </h1>
+  </div>
+</section>
+<section class = "section">
+  <div class = "container" >
+    <p class = "block">
+      <strong>Name:</strong>
+      <%= @event.name %>
+    </p>
+    <p class = "block">
+      <strong>Location:</strong>
+      <%= @event.location %>
+    </p>
+    <p class = "block">
+      <strong>Date:</strong>
+      <%= @event.date %>
+    </p>
+    <p class = "block">
+      <strong>Creator:</strong>
+      <%= @event.creator_display_name %>
+    </p>
+  </div>
+</section>
+<section class = "section">
+  <div class = "container" >
+    <div class="block">
+      <%= link_to 'Edit', edit_event_path(@event), class: "button is-link" %>
+    </div>
+    <div class="block">
+      <%= link_to 'Back', root_path, class: "button is-link" %>
+    </div>
+  </div>
+</section>
