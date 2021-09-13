@@ -13,7 +13,7 @@
     <% @events.each do | event | %>
       <div class= "box">
         <div class= "content">
-          <h2 class= "title"><%= event.name %></h2>
+          <a href= "<%= event_path(event) %>" class= "title"><%= event.name %></a>
           <p>Date: <%= event.date %></p>
           <p>Location: <%= event.location %></p>
           <p>Creator: <%= event.creator_display_name %></p>
