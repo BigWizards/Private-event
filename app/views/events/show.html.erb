@@ -1,7 +1,7 @@
 <section class = "section">
   <div class = "container">
     <h1 class = "title">
-      Your new event!
+      <%= @event.name %>
     </h1>
   </div>
 </section>
@@ -25,13 +25,16 @@
     </p>
   </div>
 </section>
-<section class = "section">
-  <div class = "container" >
-    <div class="block">
-      <%= link_to 'Edit', edit_event_path(@event), class: "button is-link" %>
+<%= render partial: "event_attendances/form", locals: {event: @event} %>
+<% if user_signed_in? %>
+  <section class = "section">
+    <div class = "container" >
+      <div class="block">
+        <%= link_to 'Edit', edit_event_path(@event), class: "button is-link" %>
+      </div>
+      <div class="block">
+        <%= link_to 'Back', root_path, class: "button is-link" %>
+      </div>
     </div>
-    <div class="block">
-      <%= link_to 'Back', root_path, class: "button is-link" %>
-    </div>
-  </div>
-</section>
+  </section>
+<% end %>
