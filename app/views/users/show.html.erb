@@ -25,8 +25,8 @@
     </h1>
     <div class="columns">
       <div class="column">
-        <h2 class="title is-4">Future events</h2>
-          <% if current_user.attended_events.where("date >= ?", DateTime.now) %>
+        <h2 class="title is-4">Upcoming events</h2>
+          <% if current_user.attended_events.where("date >= ?", DateTime.now).any? %>
             <% current_user.attended_events.where("date >= ?", DateTime.now).find_each do | event | %>
               <%= render partial: "events/event_box", locals: {event: event} %>
             <% end %>
@@ -38,7 +38,7 @@
         </div>
         <div class="column">
           <h2 class="title is-4">Past events</h2>
-            <% if current_user.attended_events.where("date < ?", DateTime.now) %>
+            <% if current_user.attended_events.where("date < ?", DateTime.now).any? %>
               <% current_user.attended_events.where("date < ?", DateTime.now).find_each do | event | %>
                 <%= render partial: "events/event_box", locals: {event: event} %>
               <% end %>
