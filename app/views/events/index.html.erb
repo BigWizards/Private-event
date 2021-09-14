@@ -10,8 +10,31 @@
         Please <a href="<%= new_user_session_path%>"> Sign in</a> or <a href="<%= new_user_registration_path%>">Sign Up</a> for an account to create events and see your created events.
       </div>
     <% end %>
-    <% @events.each do | event | %>
-      <%= render partial: "events/event_box", locals: {event: event} %>
-    <% end %>
+    <div class="columns">
+      <div class="column">
+        <h2 class="title is-4">Upcoming events</h2>
+          <% if Event.upcoming.any? %>
+            <% Event.upcoming.find_each do | event | %>
+              <%= render partial: "events/event_box", locals: {event: event} %>
+            <% end %>
+            <% else %>
+            <div class = "block">
+              <% current_user.name %> is attending no future events.
+            </div>
+          <% end %>
+        </div>
+        <div class="column">
+          <h2 class="title is-4">Past events</h2>
+            <% if Event.past.any? %>
+              <% Event.past.find_each do | event | %>
+                <%= render partial: "events/event_box", locals: {event: event} %>
+              <% end %>
+              <% else %>
+              <div class = "block">
+                <% current_user.name %> has attended no previous events.
+              </div>
+            <% end %>
+        </div>
+      </div>
   </div>
 </section>
