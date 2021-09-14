@@ -1,40 +1,56 @@
-<section class = "section">
-  <div class = "container">
-    <h1 class = "title">
+<section class="section">
+  <div class="container">
+    <h1 class="title is-2">
       <%= @event.name %>
     </h1>
   </div>
 </section>
-<section class = "section">
-  <div class = "container" >
-    <p class = "block">
+<section class="section">
+  <div class="container" >
+    <p class="block">
       <strong>Name:</strong>
       <%= @event.name %>
     </p>
-    <p class = "block">
+    <p class="block">
       <strong>Location:</strong>
       <%= @event.location %>
     </p>
-    <p class = "block">
+    <p class="block">
       <strong>Date:</strong>
       <%= @event.date %>
     </p>
-    <p class = "block">
+    <p class="block">
       <strong>Creator:</strong>
       <%= @event.creator_display_name %>
     </p>
   </div>
 </section>
-<%= render partial: "event_attendances/form", locals: {event: @event} %>
-<% if user_signed_in? %>
-  <section class = "section">
-    <div class = "container" >
+<% if current_user == @event.creator%>
+  <section class="section">
+    <div class="container">
       <div class="block">
         <%= link_to 'Edit', edit_event_path(@event), class: "button is-link" %>
-      </div>
-      <div class="block">
         <%= link_to 'Back', root_path, class: "button is-link" %>
       </div>
     </div>
   </section>
 <% end %>
+<section class="section">
+  <div class="container">
+    <div class="block">
+      <%= render partial: "event_attendances/form", locals: {event: @event} %>
+    </div>
+    <div class="block">
+      <h2 class="title is-4">List of attendees</h2>
+        <div class="content">
+          <% if @event.attendees.any? %>
+            <% @event.attendees.each do |attendee| %>
+              <ul><%= attendee.name %></ul>
+            <% end %>
+            <% else %>
+              <p>There are no attendees.</p>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</section>
